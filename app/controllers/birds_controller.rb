@@ -22,6 +22,24 @@ class BirdsController < ApplicationController
     end
   end
 
+  def destroy
+    bird = Bird.find_by(id: params[:id])
+    if bird
+      bird.destroy
+      head :no_content
+      # render json: {}
+
+
+
+
+      # if fetching causes errors you might need to return an empty json object
+      # example
+      # render json: {} would replace head :no_content above.
+    else
+      render json: { error: "Bird not found", status: :not_found }
+    end
+  end
+
   # PATCH /birds/:id
   def update
     bird = Bird.find_by(id: params[:id])
